@@ -19,9 +19,12 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-black relative overflow-hidden">
-      {/* Cosmic background effects */}
-      <div className="fixed inset-0 bg-gradient-to-b from-cosmic-purple/10 via-transparent to-cosmic-blue/5" />
-      <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-cosmic-purple/20 rounded-full blur-[120px] opacity-30" />
+      {/* Subtle cosmic gradient background */}
+      <div className="fixed inset-0 bg-gradient-to-br from-cosmic-purple/8 via-black to-cosmic-blue/6" />
+      <div className="fixed inset-0 bg-gradient-to-t from-black via-transparent to-cosmic-purple/10" />
+      <div className="fixed top-0 left-1/4 w-[600px] h-[400px] bg-cosmic-purple/15 rounded-full blur-[150px]" />
+      <div className="fixed bottom-0 right-1/4 w-[500px] h-[300px] bg-cosmic-blue/10 rounded-full blur-[120px]" />
+      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-cosmic-gold/5 rounded-full blur-[200px]" />
       
       <div className="relative z-10">
         <DashboardHeader onSettingsClick={() => setShowSettings(!showSettings)} />
