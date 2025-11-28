@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
+import logo from "@/assets/logo-purple.png";
 
 const Hero = () => {
   return (
@@ -20,6 +21,28 @@ const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/40 to-background" />
         <div className="absolute inset-0 bg-gradient-ethereal animate-glow-pulse" />
       </div>
+
+      {/* Header with Logo */}
+      <header className="absolute top-0 left-0 right-0 z-20 px-6 md:px-12 py-4">
+        <div className="container mx-auto flex items-center justify-between">
+          <Link to="/" className="group">
+            <img 
+              src={logo} 
+              alt="Feng Shui Angels" 
+              className="h-16 md:h-20 w-auto object-contain group-hover:scale-105 transition-transform drop-shadow-lg"
+            />
+          </Link>
+          <nav className="flex items-center gap-4">
+            <Button
+              asChild
+              variant="ghost"
+              className="text-foreground/80 hover:text-foreground hover:bg-white/10"
+            >
+              <Link to="/dashboard">Dashboard</Link>
+            </Button>
+          </nav>
+        </div>
+      </header>
 
       {/* Content */}
       <div className="relative z-10 flex h-full items-center">
