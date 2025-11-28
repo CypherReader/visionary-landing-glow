@@ -29,7 +29,7 @@ const Hero = () => {
             <img 
               src={logo} 
               alt="Feng Shui Angels" 
-              className="h-16 md:h-20 w-auto object-contain group-hover:scale-105 transition-transform drop-shadow-lg"
+              className="h-20 md:h-28 w-auto object-contain group-hover:scale-105 transition-transform drop-shadow-lg"
             />
           </Link>
           <nav className="flex items-center gap-4">
