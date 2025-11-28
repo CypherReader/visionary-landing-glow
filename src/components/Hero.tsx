@@ -25,11 +25,12 @@ const Hero = () => {
       {/* Header with Logo */}
       <header className="absolute top-0 left-0 right-0 z-20 px-6 md:px-12 py-4">
         <div className="container mx-auto flex items-center justify-between">
-          <Link to="/" className="group">
+          <Link to="/" className="group relative">
+            <div className="absolute inset-0 bg-cosmic-purple/30 blur-2xl rounded-full animate-pulse scale-75" />
             <img 
               src={logo} 
               alt="Feng Shui Angels" 
-              className="h-24 md:h-36 w-auto object-contain group-hover:scale-105 transition-transform drop-shadow-lg"
+              className="relative h-24 md:h-36 w-auto object-contain group-hover:scale-105 transition-transform drop-shadow-[0_0_25px_rgba(168,85,247,0.4)]"
             />
           </Link>
           <nav className="flex items-center gap-4">
