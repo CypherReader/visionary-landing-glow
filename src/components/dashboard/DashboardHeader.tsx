@@ -1,4 +1,4 @@
-import { Settings, Home, Sparkles } from "lucide-react";
+import { Settings, Home, Sparkles, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
@@ -30,6 +30,13 @@ const DashboardHeader = ({ onSettingsClick }: DashboardHeaderProps) => {
             Home
           </Link>
           <span className="text-sm text-cosmic-gold font-medium">Nura Planner</span>
+          <Link 
+            to="/matcher" 
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2"
+          >
+            <Heart className="w-4 h-4" />
+            Cosmic Matcher
+          </Link>
         </nav>
 
         {/* Actions */}
