@@ -3,7 +3,6 @@ import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import CalendarSidebar from "@/components/dashboard/CalendarSidebar";
 import CalendarMainStage from "@/components/dashboard/CalendarMainStage";
 import SettingsPanel from "@/components/dashboard/SettingsPanel";
-import CosmicOrb from "@/components/dashboard/CosmicOrb";
 
 const Dashboard = () => {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
@@ -31,7 +30,7 @@ const Dashboard = () => {
           <SettingsPanel onClose={() => setShowSettings(false)} />
         )}
         
-        <div className="flex flex-col lg:flex-row gap-6 p-4 lg:p-6 max-w-[1800px] mx-auto">
+        <div className="flex flex-col lg:flex-row gap-6 p-4 lg:p-6 max-w-[1600px] mx-auto">
           {/* Sidebar */}
           <CalendarSidebar
             selectedDate={selectedDate}
@@ -42,9 +41,6 @@ const Dashboard = () => {
           
           {/* Main Stage */}
           <CalendarMainStage selectedDate={selectedDate} energyLayers={energyLayers} />
-          
-          {/* Cosmic Animation */}
-          <CosmicOrb />
         </div>
       </div>
     </div>

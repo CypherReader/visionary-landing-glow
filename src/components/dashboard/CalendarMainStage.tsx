@@ -1,6 +1,7 @@
 import { format, isSameDay } from "date-fns";
 import DailyInsightCard from "./DailyInsightCard";
 import WeekView from "./WeekView";
+import CosmicOrb from "./CosmicOrb";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface CalendarMainStageProps {
@@ -77,8 +78,9 @@ const CalendarMainStage = ({ selectedDate, energyLayers }: CalendarMainStageProp
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="daily" className="mt-6">
+        <TabsContent value="daily" className="mt-6 space-y-6">
           <DailyInsightCard insight={insight} />
+          <CosmicOrb selectedDate={selectedDate} />
         </TabsContent>
 
         <TabsContent value="week" className="mt-6">
