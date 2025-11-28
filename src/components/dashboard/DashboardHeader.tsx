@@ -1,4 +1,4 @@
-import { Settings, Home, Sparkles, Heart } from "lucide-react";
+import { Settings, Home, Sparkles, Heart, Grid3X3 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
@@ -36,6 +36,13 @@ const DashboardHeader = ({ onSettingsClick }: DashboardHeaderProps) => {
           >
             <Heart className="w-4 h-4" />
             Cosmic Matcher
+          </Link>
+          <Link 
+            to="/oracle" 
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2"
+          >
+            <Grid3X3 className="w-4 h-4" />
+            Strategic Oracle
           </Link>
         </nav>
 
