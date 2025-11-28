@@ -16,7 +16,7 @@ const DashboardHeader = ({ onSettingsClick }: DashboardHeaderProps) => {
             <Sparkles className="w-5 h-5 text-black" />
           </div>
           <span className="font-serif text-xl text-foreground group-hover:text-cosmic-gold transition-colors">
-            AngelHarmony
+            Feng Shui Angels
           </span>
         </Link>
 
