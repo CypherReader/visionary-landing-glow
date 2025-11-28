@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Sparkles, Home, ArrowLeft, Compass, Grid3X3 } from "lucide-react";
+import { ArrowLeft, Compass } from "lucide-react";
+import logo from "@/assets/logo-purple.png";
 import { Button } from "@/components/ui/button";
 import CosmicTerminal from "@/components/oracle/CosmicTerminal";
 import ChartCastingAnimation from "@/components/oracle/ChartCastingAnimation";
@@ -116,13 +117,12 @@ const Oracle = () => {
       {/* Header */}
       <header className="relative z-50 border-b border-white/10 bg-black/50 backdrop-blur-xl">
         <div className="max-w-[1600px] mx-auto px-4 lg:px-6 h-16 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cosmic-gold to-emerald-500 flex items-center justify-center">
-              <Grid3X3 className="w-5 h-5 text-black" />
-            </div>
-            <span className="font-serif text-xl text-foreground group-hover:text-cosmic-gold transition-colors">
-              Feng Shui Angels
-            </span>
+          <Link to="/" className="flex items-center group">
+            <img 
+              src={logo} 
+              alt="Feng Shui Angels" 
+              className="h-14 w-auto object-contain group-hover:scale-105 transition-transform"
+            />
           </Link>
 
           <nav className="flex items-center gap-4">
