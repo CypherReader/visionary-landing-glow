@@ -105,7 +105,7 @@ const Matcher = () => {
         >
           <source src="/matcher-video.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/85" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-cosmic-purple/10 rounded-full blur-[150px] opacity-30" />
       </div>
 
