@@ -99,19 +99,20 @@ const Oracle = () => {
 
   return (
     <div className="min-h-screen bg-black relative overflow-hidden">
-      {/* Cosmic background */}
+      {/* Video background */}
       <div className="fixed inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-cosmic-deep via-black to-cosmic-deep" />
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="h-full w-full object-cover opacity-50"
+        >
+          <source src="/oracle-video.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
         <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-emerald-500/10 rounded-full blur-[150px]" />
         <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-amber-500/10 rounded-full blur-[150px]" />
-        {/* Grid overlay */}
-        <div className="absolute inset-0 opacity-5" style={{
-          backgroundImage: `
-            linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
-          `,
-          backgroundSize: "50px 50px"
-        }} />
       </div>
 
       {/* Header */}

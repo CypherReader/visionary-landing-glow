@@ -94,9 +94,18 @@ const Matcher = () => {
 
   return (
     <div className="min-h-screen bg-black relative overflow-hidden">
-      {/* Cosmic background */}
+      {/* Video background */}
       <div className="fixed inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-cosmic-purple/10 via-transparent to-cosmic-blue/5" />
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="h-full w-full object-cover opacity-60"
+        >
+          <source src="/matcher-video.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/80" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-cosmic-purple/10 rounded-full blur-[150px] opacity-30" />
       </div>
 
