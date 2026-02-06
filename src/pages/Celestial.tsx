@@ -1,8 +1,6 @@
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import ParticleField from "@/components/celestial/ParticleField";
-import CausticLight from "@/components/celestial/CausticLight";
 import DailyBriefing from "@/components/celestial/DailyBriefing";
 import TodaysMaster from "@/components/celestial/TodaysMaster";
 import SmartActions from "@/components/celestial/SmartActions";
@@ -18,38 +16,12 @@ import { ScrollReveal } from "@/components/celestial/ScrollReveal";
 const Celestial = () => {
   return (
     <div className="min-h-screen relative overflow-hidden bg-cel-bg">
-      {/* Warm cream gradient layers */}
+      {/* Clean pearl gradient — Apple style */}
       <div className="fixed inset-0 bg-gradient-to-b from-[hsl(var(--cel-bg))] via-[hsl(var(--cel-bg-mid))] to-[hsl(var(--cel-bg-end))]" />
-
-      {/* Animated divine light — two slow-drifting golden radial glows */}
-      <div
-        className="fixed inset-0 pointer-events-none animate-celestial-light-a"
-        style={{
-          background:
-            "radial-gradient(ellipse 600px 400px at 40% 15%, hsl(var(--cel-gold-glow) / 0.07), transparent 70%)",
-        }}
-      />
-      <div
-        className="fixed inset-0 pointer-events-none animate-celestial-light-b"
-        style={{
-          background:
-            "radial-gradient(ellipse 500px 350px at 65% 60%, hsl(var(--cel-gold-glow) / 0.05), transparent 70%)",
-        }}
-      />
-
-      <CausticLight />
-      <ParticleField />
-
-      <div
-        className="fixed inset-0 opacity-[0.025] pointer-events-none z-[2]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-        }}
-      />
 
       {/* Content */}
       <div className="relative z-10 max-w-[1200px] mx-auto px-4 lg:px-8 py-6 space-y-5">
-        {/* Nav — instant, no animation */}
+        {/* Nav */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -64,7 +36,7 @@ const Celestial = () => {
           </Link>
         </motion.div>
 
-        {/* Section 1: Daily Briefing — loads immediately with slight delay */}
+        {/* Section 1: Daily Briefing */}
         <ScrollReveal delay={0.1}>
           <DailyBriefing />
         </ScrollReveal>
@@ -114,12 +86,12 @@ const Celestial = () => {
           <JourneyProgress />
         </ScrollReveal>
 
-        {/* Overflow link */}
+        {/* Footer link */}
         <ScrollReveal>
           <div className="flex justify-center py-4">
             <Link
               to="/dashboard"
-              className="text-sm text-cel-text-secondary hover:text-cel-gold transition-colors"
+              className="text-sm text-cel-text-secondary hover:text-cel-text-primary transition-colors"
             >
               All Features →
             </Link>

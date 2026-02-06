@@ -58,52 +58,51 @@ All colors MUST be HSL.
     --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-ambient: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 
-    /* ─── Celestial Luminous Palette ("The Heavens") ─── */
-    --cel-bg: 35 45% 96%;
-    --cel-bg-mid: 35 40% 93%;
-    --cel-bg-end: 33 35% 88%;
+    /* ─── Celestial Apple Frost Palette ─── */
+    --cel-bg: 240 5% 96%;
+    --cel-bg-mid: 240 4% 94%;
+    --cel-bg-end: 240 3% 91%;
     --cel-surface: 0 0% 100%;
-    --cel-glass: 30 20% 40%;
-    --cel-glass-border: 43 73% 42%;
-    --cel-gold: 43 73% 42%;
-    --cel-gold-hover: 43 60% 48%;
-    --cel-gold-glow: 43 73% 42%;
-    --cel-bronze: 30 15% 48%;
-    --cel-text-primary: 20 13% 15%;
-    --cel-text-secondary: 35 10% 43%;
-    --cel-text-tertiary: 30 8% 58%;
-    --cel-divider: 43 73% 42%;
+    --cel-glass: 220 10% 40%;
+    --cel-glass-border: 220 10% 78%;
+    --cel-gold: 28 80% 52%;
+    --cel-gold-hover: 28 85% 46%;
+    --cel-gold-glow: 28 80% 52%;
+    --cel-bronze: 220 8% 52%;
+    --cel-text-primary: 220 15% 12%;
+    --cel-text-secondary: 220 8% 46%;
+    --cel-text-tertiary: 220 5% 62%;
+    --cel-divider: 220 10% 88%;
 
-    /* Celestial state colors — adjusted for light background */
-    --cel-cosmic-surge: 43 73% 42%;
-    --cel-rising-tide: 168 50% 36%;
-    --cel-controlled-burn: 25 55% 49%;
-    --cel-still-waters: 210 29% 50%;
-    --cel-fog-of-war: 60 4% 51%;
-    --cel-clash-day: 0 42% 51%;
+    /* Celestial state colors — Apple-clean */
+    --cel-cosmic-surge: 28 80% 52%;
+    --cel-rising-tide: 160 55% 42%;
+    --cel-controlled-burn: 28 65% 52%;
+    --cel-still-waters: 210 50% 55%;
+    --cel-fog-of-war: 220 8% 58%;
+    --cel-clash-day: 0 55% 55%;
   }
 
-  /* ─── Celestial Night — warm dark override for system dark mode ─── */
+  /* ─── Celestial Night — dark override for system dark mode ─── */
   @media (prefers-color-scheme: dark) {
     :root {
-      --cel-bg: 30 15% 8%;
-      --cel-bg-mid: 30 18% 10%;
-      --cel-bg-end: 30 12% 7%;
-      --cel-surface: 25 18% 12%;
+      --cel-bg: 225 15% 8%;
+      --cel-bg-mid: 225 12% 10%;
+      --cel-bg-end: 225 10% 7%;
+      --cel-surface: 225 12% 13%;
       --cel-glass: 0 0% 100%;
-      --cel-glass-border: 43 73% 42%;
-      /* Gold stays IDENTICAL — the signature persists day and night */
-      --cel-text-primary: 38 45% 93%;
-      --cel-text-secondary: 35 10% 55%;
-      --cel-text-tertiary: 28 8% 38%;
+      --cel-glass-border: 220 10% 25%;
+      --cel-text-primary: 220 15% 93%;
+      --cel-text-secondary: 220 8% 58%;
+      --cel-text-tertiary: 220 5% 40%;
 
       /* State colors — slightly lighter for dark readability */
-      --cel-cosmic-surge: 43 60% 55%;
-      --cel-rising-tide: 168 40% 48%;
-      --cel-controlled-burn: 25 50% 56%;
-      --cel-still-waters: 210 25% 56%;
-      --cel-fog-of-war: 60 3% 52%;
-      --cel-clash-day: 0 40% 56%;
+      --cel-cosmic-surge: 28 75% 58%;
+      --cel-rising-tide: 160 45% 50%;
+      --cel-controlled-burn: 28 60% 58%;
+      --cel-still-waters: 210 40% 58%;
+      --cel-fog-of-war: 220 6% 54%;
+      --cel-clash-day: 0 50% 58%;
     }
   }
 }
