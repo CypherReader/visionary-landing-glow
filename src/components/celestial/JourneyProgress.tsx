@@ -27,7 +27,7 @@ const JourneyProgress = () => {
             <span className="text-xs text-cel-gold font-semibold">{phaseProgress}%</span>
           </div>
           <p className="text-lg font-serif font-semibold text-cel-text-primary">{currentPhase}</p>
-          <div className="h-1.5 w-full rounded-full bg-[hsl(var(--cel-glass)/0.08)] overflow-hidden">
+          <div className="h-1.5 w-full rounded-full bg-[hsl(var(--cel-glass)/0.12)] overflow-hidden">
             <div
               className="h-full rounded-full bg-gradient-to-r from-[hsl(var(--cel-gold))] to-[hsl(var(--cel-gold-hover))] transition-all duration-700"
               style={{ width: `${phaseProgress}%` }}
@@ -37,12 +37,12 @@ const JourneyProgress = () => {
 
         {/* Stats */}
         <div className="flex-1 flex gap-3">
-          <div className="flex-1 rounded-xl border border-[hsl(var(--cel-glass-border)/0.06)] bg-[hsl(var(--cel-glass)/0.02)] p-4 flex flex-col items-center justify-center gap-1">
+          <div className="flex-1 rounded-xl border border-[hsl(var(--cel-glass-border)/0.12)] bg-[hsl(var(--cel-glass)/0.04)] p-4 flex flex-col items-center justify-center gap-1">
             <span className="text-2xl font-serif font-bold text-cel-text-primary tabular-nums">{streakDays}</span>
             <span className="text-[10px] text-cel-text-secondary uppercase tracking-wider text-center">Day Streak</span>
           </div>
 
-          <div className="flex-1 rounded-xl border border-[hsl(var(--cel-glass-border)/0.06)] bg-[hsl(var(--cel-glass)/0.02)] p-4 flex flex-col items-center justify-center gap-1">
+          <div className="flex-1 rounded-xl border border-[hsl(var(--cel-glass-border)/0.12)] bg-[hsl(var(--cel-glass)/0.04)] p-4 flex flex-col items-center justify-center gap-1">
             <span className="text-2xl font-serif font-bold text-cel-text-primary tabular-nums">{consultations}</span>
             <span className="text-[10px] text-cel-text-secondary uppercase tracking-wider text-center">Consultations</span>
           </div>

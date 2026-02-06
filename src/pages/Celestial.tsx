@@ -17,11 +17,11 @@ import { ScrollReveal } from "@/components/celestial/ScrollReveal";
 const Celestial = () => {
   return (
     <div className="min-h-screen relative overflow-hidden bg-cel-bg">
-      {/* Deep space gradient layers */}
+      {/* Warm cream gradient layers */}
       <div className="fixed inset-0 bg-gradient-to-b from-[hsl(var(--cel-bg))] via-[hsl(var(--cel-bg-mid))] to-[hsl(var(--cel-bg-end))]" />
-      <div className="fixed top-0 left-1/3 w-[600px] h-[400px] bg-[hsl(var(--cel-bg-mid)/0.5)] rounded-full blur-[180px]" />
-      <div className="fixed bottom-1/4 right-1/4 w-[400px] h-[300px] bg-[hsl(var(--cel-gold-glow)/0.04)] rounded-full blur-[160px]" />
-      <div className="fixed top-0 left-0 right-0 h-[300px] bg-gradient-to-b from-[hsl(var(--cel-gold-glow)/0.03)] to-transparent" />
+      {/* Golden radiance from top — divine light pouring down */}
+      <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-[hsl(var(--cel-gold-glow)/0.06)] rounded-full blur-[200px]" />
+      <div className="fixed bottom-1/3 right-1/4 w-[400px] h-[300px] bg-[hsl(var(--cel-gold-glow)/0.03)] rounded-full blur-[160px]" />
 
       <ParticleField />
 
