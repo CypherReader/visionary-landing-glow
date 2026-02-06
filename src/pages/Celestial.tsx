@@ -19,6 +19,14 @@ const Celestial = () => {
       {/* Clean pearl gradient — Apple style */}
       <div className="fixed inset-0 bg-gradient-to-b from-[hsl(var(--cel-bg))] via-[hsl(var(--cel-bg-mid))] to-[hsl(var(--cel-bg-end))]" />
 
+      {/* Apple-style ambient spotlight behind hero area */}
+      <div
+        className="fixed top-[-10%] left-1/2 -translate-x-1/2 w-[800px] h-[500px] pointer-events-none z-[1] opacity-40"
+        style={{
+          background: "radial-gradient(ellipse at center, hsl(var(--cel-gold) / 0.08), transparent 70%)",
+        }}
+      />
+
       {/* Content */}
       <div className="relative z-10 max-w-[1200px] mx-auto px-4 lg:px-8 py-6 space-y-5">
         {/* Nav */}
