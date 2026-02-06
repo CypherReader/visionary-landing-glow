@@ -8,6 +8,7 @@ import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import Matcher from "./pages/Matcher";
 import Oracle from "./pages/Oracle";
+import Celestial from "./pages/Celestial";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/matcher" element={<Matcher />} />
           <Route path="/oracle" element={<Oracle />} />
+          <Route path="/celestial" element={<Celestial />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
