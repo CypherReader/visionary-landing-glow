@@ -22,14 +22,14 @@ const Celestial = () => {
 
       {/* Animated divine light — two slow-drifting golden radial glows */}
       <div
-        className="fixed inset-0 pointer-events-none animate-[celestial-light-a_25s_ease-in-out_infinite]"
+        className="fixed inset-0 pointer-events-none animate-celestial-light-a"
         style={{
           background:
             "radial-gradient(ellipse 600px 400px at 40% 15%, hsl(var(--cel-gold-glow) / 0.07), transparent 70%)",
         }}
       />
       <div
-        className="fixed inset-0 pointer-events-none animate-[celestial-light-b_30s_ease-in-out_infinite]"
+        className="fixed inset-0 pointer-events-none animate-celestial-light-b"
         style={{
           background:
             "radial-gradient(ellipse 500px 350px at 65% 60%, hsl(var(--cel-gold-glow) / 0.05), transparent 70%)",
