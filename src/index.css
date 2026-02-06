@@ -57,6 +57,30 @@ All colors MUST be HSL.
     /* Transitions */
     --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-ambient: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* ─── Celestial Observatory Palette ─── */
+    --cel-bg: 245 50% 4%;
+    --cel-bg-mid: 260 60% 6%;
+    --cel-bg-end: 255 55% 5%;
+    --cel-surface: 260 30% 8%;
+    --cel-glass: 0 0% 100%;
+    --cel-glass-border: 0 0% 100%;
+    --cel-gold: 43 65% 54%;
+    --cel-gold-hover: 43 60% 60%;
+    --cel-gold-glow: 43 65% 54%;
+    --cel-bronze: 30 15% 48%;
+    --cel-text-primary: 38 30% 94%;
+    --cel-text-secondary: 30 12% 55%;
+    --cel-text-tertiary: 25 10% 38%;
+    --cel-divider: 43 65% 54%;
+
+    /* Celestial state colors */
+    --cel-cosmic-surge: 43 60% 60%;
+    --cel-rising-tide: 180 30% 50%;
+    --cel-controlled-burn: 25 50% 56%;
+    --cel-still-waters: 210 25% 53%;
+    --cel-fog-of-war: 60 3% 47%;
+    --cel-clash-day: 0 40% 54%;
   }
 }
 

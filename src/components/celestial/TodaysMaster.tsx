@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import CelestialCard from "./CelestialCard";
 
 interface Master {
   id: string;
@@ -67,36 +68,36 @@ const TodaysMaster = () => {
   const { recommended, others } = getTodaysMaster();
 
   return (
-    <div className="rounded-2xl border border-border bg-card/80 backdrop-blur-sm p-6 lg:p-8 space-y-5">
+    <CelestialCard className="p-6 lg:p-8 space-y-5">
       <div className="flex items-center gap-2">
         <span className="text-lg">{recommended.emoji}</span>
-        <h2 className="text-sm font-semibold tracking-[0.15em] uppercase text-foreground/60">
+        <h2 className="text-sm font-medium tracking-[0.2em] uppercase text-cel-gold">
           Today's Master
         </h2>
       </div>
 
       {/* Recommended Master Card */}
-      <div className="rounded-xl border border-primary/20 bg-gradient-to-br from-primary/10 via-card to-accent/5 p-6 space-y-4">
+      <div className="rounded-xl border border-[hsl(var(--cel-gold)/0.12)] bg-[hsl(var(--cel-gold-glow)/0.04)] p-6 space-y-4">
         <div className="space-y-1">
           <div className="flex items-center gap-2.5">
             <span className="text-2xl">{recommended.emoji}</span>
             <div>
-              <h3 className="text-lg font-serif font-semibold text-foreground">
+              <h3 className="text-lg font-serif font-semibold text-cel-text-primary">
                 {recommended.name}
               </h3>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-cel-text-secondary">
                 {recommended.title}
               </p>
             </div>
           </div>
         </div>
 
-        <blockquote className="text-base font-serif leading-relaxed text-foreground/85 italic border-l-2 border-primary/30 pl-4">
+        <blockquote className="text-base font-serif leading-[1.6] text-cel-text-primary/85 italic border-l-2 border-[hsl(var(--cel-gold)/0.3)] pl-4">
           "{recommended.quote}"
         </blockquote>
 
-        <div className="flex items-start gap-2 text-xs text-muted-foreground">
-          <span className="text-secondary font-semibold shrink-0">
+        <div className="flex items-start gap-2 text-xs text-cel-text-secondary">
+          <span className="text-cel-gold font-semibold shrink-0">
             Why today:
           </span>
           <span>{recommended.reason}</span>
@@ -104,7 +105,7 @@ const TodaysMaster = () => {
 
         <Link
           to="/oracle"
-          className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors group"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-cel-gold hover:text-cel-gold-hover transition-colors group"
         >
           Consult {recommended.name}
           <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
@@ -113,19 +114,19 @@ const TodaysMaster = () => {
 
       {/* Also Available */}
       <div className="flex items-center gap-2 flex-wrap">
-        <span className="text-xs text-muted-foreground">Also available:</span>
+        <span className="text-xs text-cel-text-secondary">Also available:</span>
         {others.map((master) => (
           <Link
             key={master.id}
             to="/oracle"
-            className="inline-flex items-center gap-1.5 text-xs text-foreground/70 hover:text-foreground transition-colors px-2.5 py-1.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border"
+            className="inline-flex items-center gap-1.5 text-xs text-cel-text-primary/70 hover:text-cel-text-primary transition-colors px-2.5 py-1.5 rounded-lg hover:bg-[hsl(var(--cel-glass)/0.04)] border border-transparent hover:border-[hsl(var(--cel-glass-border)/0.06)]"
           >
             <span>{master.emoji}</span>
             <span>{master.name}</span>
           </Link>
         ))}
       </div>
-    </div>
+    </CelestialCard>
   );
 };
 

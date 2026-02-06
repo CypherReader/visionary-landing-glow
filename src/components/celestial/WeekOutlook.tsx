@@ -1,4 +1,5 @@
 import { format, addDays, isSameDay } from "date-fns";
+import CelestialCard from "./CelestialCard";
 
 interface DayOutlook {
   date: Date;
@@ -19,32 +20,14 @@ const getOutlookDays = (): DayOutlook[] => {
 };
 
 const getScoreColor = (score: number) => {
-  if (score >= 80) return "text-emerald-400";
-  if (score >= 60) return "text-cosmic-gold";
-  if (score >= 40) return "text-amber-400";
-  return "text-rose-400";
-};
-
-const getScoreBg = (score: number) => {
-  if (score >= 80) return "bg-emerald-500/10";
-  if (score >= 60) return "bg-cosmic-gold/10";
-  if (score >= 40) return "bg-amber-500/10";
-  return "bg-rose-500/10";
-};
-
-const getScoreRing = (score: number) => {
-  if (score >= 80) return "ring-emerald-500/30";
-  if (score >= 60) return "ring-cosmic-gold/30";
-  if (score >= 40) return "ring-amber-500/30";
-  return "ring-rose-500/30";
+  if (score >= 80) return "text-cel-cosmic-surge";
+  if (score >= 60) return "text-cel-controlled-burn";
+  if (score >= 40) return "text-cel-fog-of-war";
+  return "text-cel-clash-day";
 };
 
 const elementIcons: Record<string, string> = {
-  Fire: "🔥",
-  Water: "💧",
-  Wood: "🌿",
-  Metal: "⚔️",
-  Earth: "🪨",
+  Fire: "🔥", Water: "💧", Wood: "🌿", Metal: "⚔️", Earth: "🪨",
 };
 
 const WeekOutlook = () => {
@@ -52,8 +35,10 @@ const WeekOutlook = () => {
   const today = new Date();
 
   return (
-    <div className="rounded-2xl border border-white/10 bg-card/80 backdrop-blur-sm p-6 space-y-5">
-      <h2 className="text-lg font-serif text-foreground">7-Day Energy Outlook</h2>
+    <CelestialCard className="p-6 space-y-5">
+      <h2 className="text-sm font-medium tracking-[0.2em] uppercase text-cel-gold">
+        7-Day Energy Outlook
+      </h2>
 
       <div className="grid grid-cols-7 gap-3">
         {days.map((day) => {
@@ -63,21 +48,21 @@ const WeekOutlook = () => {
               key={day.date.toISOString()}
               className={`relative flex flex-col items-center rounded-2xl border p-4 transition-all space-y-2 ${
                 isToday
-                  ? "border-cosmic-purple ring-2 ring-cosmic-purple/40 bg-cosmic-purple/10"
-                  : `border-white/10 ${getScoreBg(day.score)} hover:bg-white/5`
+                  ? "border-[hsl(var(--cel-gold)/0.35)] ring-2 ring-[hsl(var(--cel-gold)/0.15)] bg-[hsl(var(--cel-gold-glow)/0.06)]"
+                  : "border-[hsl(var(--cel-glass-border)/0.06)] bg-[hsl(var(--cel-glass)/0.02)] hover:bg-[hsl(var(--cel-glass)/0.04)]"
               }`}
             >
               {isToday && (
-                <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 text-[10px] font-semibold uppercase tracking-wider bg-cosmic-purple text-primary-foreground px-2 py-0.5 rounded-full">
+                <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 text-[10px] font-semibold uppercase tracking-wider bg-gradient-to-r from-[hsl(var(--cel-gold))] to-[hsl(var(--cel-gold-hover))] text-[hsl(var(--cel-bg))] px-2 py-0.5 rounded-full">
                   Today
                 </span>
               )}
 
-              <span className="text-xs text-muted-foreground uppercase font-medium">
+              <span className="text-xs text-cel-text-secondary uppercase font-medium">
                 {format(day.date, "EEE")}
               </span>
 
-              <span className="text-sm text-foreground/70">
+              <span className="text-sm text-cel-text-primary/70">
                 {format(day.date, "d MMM")}
               </span>
 
@@ -87,13 +72,13 @@ const WeekOutlook = () => {
 
               <div className="flex items-center gap-1">
                 <span className="text-sm">{elementIcons[day.element] || "✦"}</span>
-                <span className="text-xs text-muted-foreground">{day.element}</span>
+                <span className="text-xs text-cel-text-secondary">{day.element}</span>
               </div>
             </div>
           );
         })}
       </div>
-    </div>
+    </CelestialCard>
   );
 };
 

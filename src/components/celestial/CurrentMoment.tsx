@@ -1,4 +1,5 @@
 import { Clock, ArrowRight } from "lucide-react";
+import CelestialCard from "./CelestialCard";
 
 interface ChineseHour {
   label: string;
@@ -40,26 +41,22 @@ const getCurrentHourIndex = (): number => {
 };
 
 const getScoreColor = (score: number) => {
-  if (score >= 80) return "text-emerald-400";
-  if (score >= 60) return "text-secondary";
-  if (score >= 40) return "text-amber-400";
-  return "text-rose-400";
+  if (score >= 80) return "text-cel-cosmic-surge";
+  if (score >= 60) return "text-cel-controlled-burn";
+  if (score >= 40) return "text-cel-fog-of-war";
+  return "text-cel-clash-day";
 };
 
 const getBarColor = (score: number, isActive: boolean) => {
-  if (isActive) return "bg-primary";
-  if (score >= 80) return "bg-emerald-500/60";
-  if (score >= 60) return "bg-secondary/50";
-  if (score >= 40) return "bg-amber-500/40";
-  return "bg-rose-500/40";
+  if (isActive) return "bg-cel-gold";
+  if (score >= 80) return "bg-cel-cosmic-surge/60";
+  if (score >= 60) return "bg-cel-controlled-burn/50";
+  if (score >= 40) return "bg-cel-fog-of-war/40";
+  return "bg-cel-clash-day/40";
 };
 
 const elementIcons: Record<string, string> = {
-  Fire: "🔥",
-  Water: "💧",
-  Wood: "🌿",
-  Metal: "⚔️",
-  Earth: "🪨",
+  Fire: "🔥", Water: "💧", Wood: "🌿", Metal: "⚔️", Earth: "🪨",
 };
 
 const CurrentMoment = () => {
@@ -69,17 +66,19 @@ const CurrentMoment = () => {
   const next = chineseHours[nextIndex];
 
   return (
-    <div className="rounded-2xl border border-border bg-card/80 backdrop-blur-sm p-6 space-y-5">
+    <CelestialCard className="p-6 space-y-5">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="relative">
-            <Clock className="w-5 h-5 text-primary" />
-            <div className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-400 animate-glow-pulse" />
+            <Clock className="w-5 h-5 text-cel-gold" />
+            <div className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-cel-rising-tide animate-glow-pulse" />
           </div>
-          <h2 className="text-sm font-semibold tracking-wide uppercase text-primary">Right Now</h2>
+          <h2 className="text-sm font-medium tracking-[0.2em] uppercase text-cel-gold">
+            Right Now
+          </h2>
         </div>
-        <span className="text-xs text-muted-foreground">
+        <span className="text-xs text-cel-text-secondary">
           {current.label} Hour · {current.time}–{next.time}
         </span>
       </div>
@@ -87,23 +86,23 @@ const CurrentMoment = () => {
       {/* Current Moment Hero */}
       <div className="flex flex-col sm:flex-row gap-4 items-start">
         <div className="flex items-center gap-3">
-          <div className="flex flex-col items-center gap-1 px-4 py-3 rounded-xl bg-primary/10 border border-primary/20">
+          <div className="flex flex-col items-center gap-1 px-4 py-3 rounded-xl bg-[hsl(var(--cel-gold-glow)/0.06)] border border-[hsl(var(--cel-gold)/0.12)]">
             <span className="text-3xl">{elementIcons[current.element]}</span>
             <span className={`text-3xl font-serif font-bold tabular-nums ${getScoreColor(current.score)}`}>
               {current.score}
             </span>
-            <span className="text-[10px] text-muted-foreground uppercase">{current.element}</span>
+            <span className="text-[10px] text-cel-text-secondary uppercase">{current.element}</span>
           </div>
         </div>
 
         <div className="flex-1 space-y-2">
-          <p className="text-base font-serif text-foreground leading-relaxed">
+          <p className="text-base font-serif text-cel-text-primary leading-[1.6]">
             {current.guidance}
           </p>
-          <div className="flex items-center gap-2 text-xs text-muted-foreground">
+          <div className="flex items-center gap-2 text-xs text-cel-text-secondary">
             <ArrowRight className="w-3 h-3" />
             <span>
-              Next: <span className="text-foreground/70">{next.label} ({next.element})</span> — {next.guidance.split(".")[0]}.
+              Next: <span className="text-cel-text-primary/70">{next.label} ({next.element})</span> — {next.guidance.split(".")[0]}.
             </span>
           </div>
         </div>
@@ -120,18 +119,18 @@ const CurrentMoment = () => {
             <div key={hour.label} className="flex-1 flex flex-col items-center gap-1">
               <div className="w-full flex items-end" style={{ height: 48 }}>
                 <div
-                  className={`w-full rounded-t transition-all ${getBarColor(hour.score, isActive)} ${isPast ? "opacity-40" : ""} ${isActive ? "ring-1 ring-primary/50" : ""}`}
+                  className={`w-full rounded-t transition-all ${getBarColor(hour.score, isActive)} ${isPast ? "opacity-40" : ""} ${isActive ? "ring-1 ring-cel-gold/50" : ""}`}
                   style={{ height: `${heightPercent}%`, minHeight: 4 }}
                 />
               </div>
-              <span className={`text-[8px] ${isActive ? "text-primary font-bold" : "text-muted-foreground"}`}>
+              <span className={`text-[8px] ${isActive ? "text-cel-gold font-bold" : "text-cel-text-tertiary"}`}>
                 {hour.label}
               </span>
             </div>
           );
         })}
       </div>
-    </div>
+    </CelestialCard>
   );
 };
 
