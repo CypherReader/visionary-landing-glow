@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ArrowRight, ChevronDown, ChevronUp } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import CelestialCard from "./CelestialCard";
 
 /* ─── Secret Schools ─── */
 
@@ -24,7 +25,7 @@ const schoolRotation: SchoolSpotlight[] = [
 ];
 
 const getTodaySchool = () => {
-  const day = new Date().getDay(); // 0=Sun, 1=Mon, ..., 6=Sat
+  const day = new Date().getDay();
   return schoolRotation[day];
 };
 
@@ -35,27 +36,26 @@ const CosmicIntelligenceFeed = () => {
   const school = getTodaySchool();
 
   return (
-    <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-      <div className="rounded-2xl border border-border bg-card/80 backdrop-blur-sm overflow-hidden">
+    <CelestialCard>
+      <Collapsible open={isOpen} onOpenChange={setIsOpen}>
         <CollapsibleTrigger asChild>
           <button className="w-full flex items-center justify-between p-6 pb-0 hover:opacity-80 transition-opacity">
             <div className="flex items-center gap-2">
               <span className="text-sm">🔮</span>
-              <h2 className="text-sm font-semibold tracking-[0.15em] uppercase text-foreground/60">
+              <h2 className="text-sm font-medium tracking-[0.2em] uppercase text-cel-gold">
                 Cosmic Intelligence
               </h2>
             </div>
             {isOpen ? (
-              <ChevronUp className="w-4 h-4 text-muted-foreground" />
+              <ChevronUp className="w-4 h-4 text-cel-text-secondary" />
             ) : (
-              <ChevronDown className="w-4 h-4 text-muted-foreground" />
+              <ChevronDown className="w-4 h-4 text-cel-text-secondary" />
             )}
           </button>
         </CollapsibleTrigger>
 
-        {/* Always show collapsed summary */}
         {!isOpen && (
-          <p className="px-6 py-4 text-xs text-muted-foreground">
+          <p className="px-6 py-4 text-xs text-cel-text-secondary">
             {school.emoji} {school.module} · 🏛️ Life Architect · 🏠 Feng Shui · 📅 Life Events — tap to expand
           </p>
         )}
@@ -69,8 +69,6 @@ const CosmicIntelligenceFeed = () => {
               content={school.content}
               linkTo={school.link}
               linkLabel={school.linkLabel}
-              borderColor="border-emerald-500/20"
-              bgGradient="from-emerald-500/5 to-transparent"
             />
 
             {/* Life Architect */}
@@ -81,8 +79,6 @@ const CosmicIntelligenceFeed = () => {
               content="This decade emphasises your body's relationship with your ambitions. Career pushes that ignore health will backfire in this palace."
               linkTo="/dashboard"
               linkLabel="View Full Life Map"
-              borderColor="border-primary/20"
-              bgGradient="from-primary/5 to-transparent"
             />
 
             {/* Feng Shui */}
@@ -93,8 +89,6 @@ const CosmicIntelligenceFeed = () => {
               content="Add Metal elements — a metal bowl or white/grey decor. The Tiger month's Wood energy is depleting your Northwest Metal, affecting career luck."
               linkTo="/dashboard"
               linkLabel="Full Feng Shui Analysis"
-              borderColor="border-secondary/20"
-              bgGradient="from-secondary/5 to-transparent"
             />
 
             {/* Life Event Planner */}
@@ -105,15 +99,13 @@ const CosmicIntelligenceFeed = () => {
               content="Next best date: March 9, 2026 — Wood-Water harmony day. Your Day Master is fully supported."
               linkTo="/dashboard"
               linkLabel="Plan Another Event"
-              borderColor="border-cosmic-blue/20"
-              bgGradient="from-cosmic-blue/5 to-transparent"
               urgent
               urgentText="Optimal date in 31 days"
             />
           </div>
         </CollapsibleContent>
-      </div>
-    </Collapsible>
+      </Collapsible>
+    </CelestialCard>
   );
 };
 
@@ -126,8 +118,6 @@ interface IntelCardProps {
   content: string;
   linkTo: string;
   linkLabel: string;
-  borderColor: string;
-  bgGradient: string;
   urgent?: boolean;
   urgentText?: string;
 }
@@ -139,37 +129,39 @@ const IntelCard = ({
   content,
   linkTo,
   linkLabel,
-  borderColor,
-  bgGradient,
   urgent,
   urgentText,
 }: IntelCardProps) => (
   <div
-    className={`rounded-xl border ${urgent ? "border-secondary/40" : borderColor} bg-gradient-to-br ${bgGradient} p-5 space-y-3`}
+    className={`rounded-xl border p-5 space-y-3 ${
+      urgent
+        ? "border-[hsl(var(--cel-gold)/0.2)] bg-[hsl(var(--cel-gold-glow)/0.04)]"
+        : "border-[hsl(var(--cel-glass-border)/0.06)] bg-[hsl(var(--cel-glass)/0.02)]"
+    }`}
   >
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-2">
         <span className="text-base">{emoji}</span>
-        <h3 className="text-xs font-semibold tracking-[0.12em] uppercase text-foreground/70">
+        <h3 className="text-xs font-medium tracking-[0.15em] uppercase text-cel-gold/80">
           {title}
         </h3>
       </div>
       {urgent && urgentText && (
-        <span className="text-[10px] font-semibold text-secondary bg-secondary/10 border border-secondary/20 px-2 py-0.5 rounded-full">
+        <span className="text-[10px] font-semibold text-cel-gold bg-[hsl(var(--cel-gold-glow)/0.1)] border border-[hsl(var(--cel-gold)/0.2)] px-2 py-0.5 rounded-full">
           {urgentText}
         </span>
       )}
     </div>
 
     {subtitle && (
-      <p className="text-sm font-medium text-foreground/80">{subtitle}</p>
+      <p className="text-sm font-medium text-cel-text-primary/80">{subtitle}</p>
     )}
 
-    <p className="text-sm text-muted-foreground leading-relaxed">{content}</p>
+    <p className="text-sm text-cel-text-secondary leading-relaxed">{content}</p>
 
     <Link
       to={linkTo}
-      className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:text-primary/80 transition-colors group"
+      className="inline-flex items-center gap-1.5 text-xs font-semibold text-cel-gold hover:text-cel-gold-hover transition-colors group"
     >
       {linkLabel}
       <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
