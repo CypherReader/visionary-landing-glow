@@ -123,6 +123,18 @@ export default {
           "0%": { top: "0%" },
           "100%": { top: "100%" },
         },
+        "celestial-light-a": {
+          "0%":   { transform: "translate(0%, 0%)    scale(1)",   opacity: "0.7" },
+          "30%":  { transform: "translate(15%, 8%)   scale(1.1)", opacity: "1" },
+          "60%":  { transform: "translate(-10%, 5%)  scale(0.95)", opacity: "0.6" },
+          "100%": { transform: "translate(0%, 0%)    scale(1)",   opacity: "0.7" },
+        },
+        "celestial-light-b": {
+          "0%":   { transform: "translate(0%, 0%)    scale(1)",   opacity: "0.6" },
+          "40%":  { transform: "translate(-12%, -6%) scale(1.05)", opacity: "1" },
+          "70%":  { transform: "translate(8%, -3%)   scale(1.1)", opacity: "0.5" },
+          "100%": { transform: "translate(0%, 0%)    scale(1)",   opacity: "0.6" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",

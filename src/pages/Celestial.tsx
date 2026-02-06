@@ -19,9 +19,22 @@ const Celestial = () => {
     <div className="min-h-screen relative overflow-hidden bg-cel-bg">
       {/* Warm cream gradient layers */}
       <div className="fixed inset-0 bg-gradient-to-b from-[hsl(var(--cel-bg))] via-[hsl(var(--cel-bg-mid))] to-[hsl(var(--cel-bg-end))]" />
-      {/* Golden radiance from top — divine light pouring down */}
-      <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-[hsl(var(--cel-gold-glow)/0.06)] rounded-full blur-[200px]" />
-      <div className="fixed bottom-1/3 right-1/4 w-[400px] h-[300px] bg-[hsl(var(--cel-gold-glow)/0.03)] rounded-full blur-[160px]" />
+
+      {/* Animated divine light — two slow-drifting golden radial glows */}
+      <div
+        className="fixed inset-0 pointer-events-none animate-[celestial-light-a_25s_ease-in-out_infinite]"
+        style={{
+          background:
+            "radial-gradient(ellipse 600px 400px at 40% 15%, hsl(var(--cel-gold-glow) / 0.07), transparent 70%)",
+        }}
+      />
+      <div
+        className="fixed inset-0 pointer-events-none animate-[celestial-light-b_30s_ease-in-out_infinite]"
+        style={{
+          background:
+            "radial-gradient(ellipse 500px 350px at 65% 60%, hsl(var(--cel-gold-glow) / 0.05), transparent 70%)",
+        }}
+      />
 
       <ParticleField />
 
