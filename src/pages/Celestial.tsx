@@ -1,5 +1,6 @@
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import ParticleField from "@/components/celestial/ParticleField";
 import DailyBriefing from "@/components/celestial/DailyBriefing";
 import TodaysMaster from "@/components/celestial/TodaysMaster";
@@ -11,22 +12,19 @@ import WeekOutlook from "@/components/celestial/WeekOutlook";
 import ActiveReadings from "@/components/celestial/ActiveReadings";
 import DailyInsightShareCard from "@/components/celestial/DailyInsightShareCard";
 import JourneyProgress from "@/components/celestial/JourneyProgress";
+import { ScrollReveal } from "@/components/celestial/ScrollReveal";
 
 const Celestial = () => {
   return (
     <div className="min-h-screen relative overflow-hidden bg-cel-bg">
       {/* Deep space gradient layers */}
       <div className="fixed inset-0 bg-gradient-to-b from-[hsl(var(--cel-bg))] via-[hsl(var(--cel-bg-mid))] to-[hsl(var(--cel-bg-end))]" />
-      {/* Ambient nebula glows — warm purple */}
       <div className="fixed top-0 left-1/3 w-[600px] h-[400px] bg-[hsl(var(--cel-bg-mid)/0.5)] rounded-full blur-[180px]" />
       <div className="fixed bottom-1/4 right-1/4 w-[400px] h-[300px] bg-[hsl(var(--cel-gold-glow)/0.04)] rounded-full blur-[160px]" />
-      {/* Very faint gold atmospheric glow at top */}
       <div className="fixed top-0 left-0 right-0 h-[300px] bg-gradient-to-b from-[hsl(var(--cel-gold-glow)/0.03)] to-transparent" />
 
-      {/* Particle field */}
       <ParticleField />
 
-      {/* Noise texture */}
       <div
         className="fixed inset-0 opacity-[0.025] pointer-events-none z-[2]"
         style={{
@@ -36,54 +34,82 @@ const Celestial = () => {
 
       {/* Content */}
       <div className="relative z-10 max-w-[1200px] mx-auto px-4 lg:px-8 py-6 space-y-5">
-        {/* Nav */}
-        <Link
-          to="/dashboard"
-          className="inline-flex items-center gap-2 text-sm text-cel-text-secondary hover:text-cel-text-primary transition-colors"
+        {/* Nav — instant, no animation */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.4 }}
         >
-          <ArrowLeft className="w-4 h-4" />
-          Back to Dashboard
-        </Link>
-
-        {/* Section 1: Daily Briefing — HERO */}
-        <DailyBriefing />
-
-        {/* Section 2: Today's Master — HERO */}
-        <TodaysMaster />
-
-        {/* Section 3: Today's Actions — HERO */}
-        <SmartActions />
-
-        {/* Section 4: Live Energy — HERO */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-          <CurrentMoment />
-          <ActivePowerWindows />
-        </div>
-
-        {/* Section 5: Cosmic Intelligence Feed — SURFACE */}
-        <CosmicIntelligenceFeed />
-
-        {/* Section 6: 7-Day Outlook — HERO */}
-        <WeekOutlook />
-
-        {/* Section 7: Active Readings — SURFACE */}
-        <ActiveReadings />
-
-        {/* Section 8: Daily Insight Card — HERO */}
-        <DailyInsightShareCard />
-
-        {/* Section 9: Journey — SURFACE */}
-        <JourneyProgress />
-
-        {/* Overflow link */}
-        <div className="flex justify-center py-4">
           <Link
             to="/dashboard"
-            className="text-sm text-cel-text-secondary hover:text-cel-gold transition-colors"
+            className="inline-flex items-center gap-2 text-sm text-cel-text-secondary hover:text-cel-text-primary transition-colors"
           >
-            All Features →
+            <ArrowLeft className="w-4 h-4" />
+            Back to Dashboard
           </Link>
+        </motion.div>
+
+        {/* Section 1: Daily Briefing — loads immediately with slight delay */}
+        <ScrollReveal delay={0.1}>
+          <DailyBriefing />
+        </ScrollReveal>
+
+        {/* Section 2: Today's Master */}
+        <ScrollReveal>
+          <TodaysMaster />
+        </ScrollReveal>
+
+        {/* Section 3: Today's Actions */}
+        <ScrollReveal>
+          <SmartActions />
+        </ScrollReveal>
+
+        {/* Section 4: Live Energy */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <ScrollReveal>
+            <CurrentMoment />
+          </ScrollReveal>
+          <ScrollReveal delay={0.1}>
+            <ActivePowerWindows />
+          </ScrollReveal>
         </div>
+
+        {/* Section 5: Cosmic Intelligence Feed */}
+        <ScrollReveal>
+          <CosmicIntelligenceFeed />
+        </ScrollReveal>
+
+        {/* Section 6: 7-Day Outlook */}
+        <ScrollReveal>
+          <WeekOutlook />
+        </ScrollReveal>
+
+        {/* Section 7: Active Readings */}
+        <ScrollReveal>
+          <ActiveReadings />
+        </ScrollReveal>
+
+        {/* Section 8: Daily Insight Card */}
+        <ScrollReveal>
+          <DailyInsightShareCard />
+        </ScrollReveal>
+
+        {/* Section 9: Journey */}
+        <ScrollReveal>
+          <JourneyProgress />
+        </ScrollReveal>
+
+        {/* Overflow link */}
+        <ScrollReveal>
+          <div className="flex justify-center py-4">
+            <Link
+              to="/dashboard"
+              className="text-sm text-cel-text-secondary hover:text-cel-gold transition-colors"
+            >
+              All Features →
+            </Link>
+          </div>
+        </ScrollReveal>
       </div>
     </div>
   );

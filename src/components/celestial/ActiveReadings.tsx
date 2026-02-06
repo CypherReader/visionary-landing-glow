@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { ArrowRight, ChevronDown, ChevronUp } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { motion, AnimatePresence } from "framer-motion";
 import CelestialCard from "./CelestialCard";
 
 /* ─── Mock data ─── */
@@ -15,41 +15,74 @@ const ActiveReadings = () => {
 
   return (
     <CelestialCard>
-      <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-        <CollapsibleTrigger asChild>
-          <button className="w-full flex items-center justify-between p-6 pb-0 hover:opacity-80 transition-opacity">
-            <div className="flex items-center gap-2">
-              <span className="text-sm">📖</span>
-              <h2 className="text-sm font-medium tracking-[0.2em] uppercase text-cel-gold">
-                Active Readings
-              </h2>
-            </div>
-            {isOpen ? (
-              <ChevronUp className="w-4 h-4 text-cel-text-secondary" />
-            ) : (
-              <ChevronDown className="w-4 h-4 text-cel-text-secondary" />
-            )}
-          </button>
-        </CollapsibleTrigger>
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex items-center justify-between p-6 pb-0 hover:opacity-80 transition-opacity"
+      >
+        <div className="flex items-center gap-2">
+          <span className="text-sm">📖</span>
+          <h2 className="text-sm font-medium tracking-[0.2em] uppercase text-cel-gold">
+            Active Readings
+          </h2>
+        </div>
+        <motion.div
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.25 }}
+        >
+          <ChevronDown className="w-4 h-4 text-cel-text-secondary" />
+        </motion.div>
+      </button>
 
+      <AnimatePresence initial={false}>
         {!isOpen && (
-          <p className="px-6 py-4 text-xs text-cel-text-secondary">
+          <motion.p
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25 }}
+            className="px-6 py-4 text-xs text-cel-text-secondary overflow-hidden"
+          >
             🔮 Oracle · 💜 Relationship · 📊 Convergence · 🧬 Ancestral — tap to expand
-          </p>
+          </motion.p>
         )}
+      </AnimatePresence>
 
-        <CollapsibleContent>
-          <div className="p-6 pt-4 space-y-4">
-            <ExtendedOracleCard />
-            <RelationshipCard />
-            {hasConvergenceReport ? <ConvergenceCardCompleted /> : <ConvergenceCardTeaser />}
-            {hasAncestralReading ? <AncestralCardCompleted /> : <AncestralCardTeaser />}
-          </div>
-        </CollapsibleContent>
-      </Collapsible>
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.35, ease: [0.25, 0.4, 0.25, 1] }}
+            className="overflow-hidden"
+          >
+            <div className="p-6 pt-4 space-y-4">
+              <ReadingCard index={0}><ExtendedOracleCard /></ReadingCard>
+              <ReadingCard index={1}><RelationshipCard /></ReadingCard>
+              <ReadingCard index={2}>
+                {hasConvergenceReport ? <ConvergenceCardCompleted /> : <ConvergenceCardTeaser />}
+              </ReadingCard>
+              <ReadingCard index={3}>
+                {hasAncestralReading ? <AncestralCardCompleted /> : <AncestralCardTeaser />}
+              </ReadingCard>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </CelestialCard>
   );
 };
+
+/* ─── Animated wrapper for stagger ─── */
+const ReadingCard = ({ children, index }: { children: React.ReactNode; index: number }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 12 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.35, delay: index * 0.08, ease: [0.25, 0.4, 0.25, 1] }}
+  >
+    {children}
+  </motion.div>
+);
 
 /* ─── Shared inner card styles ─── */
 const innerCard = "rounded-xl border border-[hsl(var(--cel-glass-border)/0.06)] bg-[hsl(var(--cel-glass)/0.02)] p-5 space-y-3";

@@ -1,5 +1,7 @@
 import { format, addDays, isSameDay } from "date-fns";
+import { motion } from "framer-motion";
 import CelestialCard from "./CelestialCard";
+import { useCountUp } from "@/hooks/use-count-up";
 
 interface DayOutlook {
   date: Date;
@@ -30,6 +32,15 @@ const elementIcons: Record<string, string> = {
   Fire: "🔥", Water: "💧", Wood: "🌿", Metal: "⚔️", Earth: "🪨",
 };
 
+const DayScore = ({ score }: { score: number }) => {
+  const [displayScore, ref] = useCountUp({ end: score, duration: 900 });
+  return (
+    <span ref={ref as React.RefObject<HTMLSpanElement>} className={`text-3xl font-serif font-bold tabular-nums ${getScoreColor(score)}`}>
+      {displayScore}
+    </span>
+  );
+};
+
 const WeekOutlook = () => {
   const days = getOutlookDays();
   const today = new Date();
@@ -41,11 +52,15 @@ const WeekOutlook = () => {
       </h2>
 
       <div className="grid grid-cols-7 gap-3">
-        {days.map((day) => {
+        {days.map((day, i) => {
           const isToday = isSameDay(day.date, today);
           return (
-            <div
+            <motion.div
               key={day.date.toISOString()}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.06, ease: [0.25, 0.4, 0.25, 1] }}
               className={`relative flex flex-col items-center rounded-2xl border p-4 transition-all space-y-2 ${
                 isToday
                   ? "border-[hsl(var(--cel-gold)/0.35)] ring-2 ring-[hsl(var(--cel-gold)/0.15)] bg-[hsl(var(--cel-gold-glow)/0.06)]"
@@ -66,15 +81,13 @@ const WeekOutlook = () => {
                 {format(day.date, "d MMM")}
               </span>
 
-              <span className={`text-3xl font-serif font-bold tabular-nums ${getScoreColor(day.score)}`}>
-                {day.score}
-              </span>
+              <DayScore score={day.score} />
 
               <div className="flex items-center gap-1">
                 <span className="text-sm">{elementIcons[day.element] || "✦"}</span>
                 <span className="text-xs text-cel-text-secondary">{day.element}</span>
               </div>
-            </div>
+            </motion.div>
           );
         })}
       </div>
