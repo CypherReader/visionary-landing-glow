@@ -82,6 +82,30 @@ All colors MUST be HSL.
     --cel-fog-of-war: 60 4% 51%;
     --cel-clash-day: 0 42% 51%;
   }
+
+  /* ─── Celestial Night — warm dark override for system dark mode ─── */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --cel-bg: 30 15% 8%;
+      --cel-bg-mid: 30 18% 10%;
+      --cel-bg-end: 30 12% 7%;
+      --cel-surface: 25 18% 12%;
+      --cel-glass: 0 0% 100%;
+      --cel-glass-border: 43 73% 42%;
+      /* Gold stays IDENTICAL — the signature persists day and night */
+      --cel-text-primary: 38 45% 93%;
+      --cel-text-secondary: 35 10% 55%;
+      --cel-text-tertiary: 28 8% 38%;
+
+      /* State colors — slightly lighter for dark readability */
+      --cel-cosmic-surge: 43 60% 55%;
+      --cel-rising-tide: 168 40% 48%;
+      --cel-controlled-burn: 25 50% 56%;
+      --cel-still-waters: 210 25% 56%;
+      --cel-fog-of-war: 60 3% 52%;
+      --cel-clash-day: 0 40% 56%;
+    }
+  }
 }
 
 @layer base {
