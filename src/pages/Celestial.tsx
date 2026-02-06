@@ -19,9 +19,19 @@ const Celestial = () => {
       {/* Clean pearl gradient — Apple style */}
       <div className="fixed inset-0 bg-gradient-to-b from-[hsl(var(--cel-bg))] via-[hsl(var(--cel-bg-mid))] to-[hsl(var(--cel-bg-end))]" />
 
+      {/* Ethereal cloud video — very low opacity, sits behind glass cards */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="fixed inset-0 w-full h-full object-cover pointer-events-none z-[1] opacity-[0.35]"
+        src="/celestial-bg.mp4"
+      />
+
       {/* Apple-style ambient spotlight behind hero area */}
       <div
-        className="fixed top-[-10%] left-1/2 -translate-x-1/2 w-[800px] h-[500px] pointer-events-none z-[1] opacity-40"
+        className="fixed top-[-10%] left-1/2 -translate-x-1/2 w-[800px] h-[500px] pointer-events-none z-[2] opacity-40"
         style={{
           background: "radial-gradient(ellipse at center, hsl(var(--cel-gold) / 0.08), transparent 70%)",
         }}
