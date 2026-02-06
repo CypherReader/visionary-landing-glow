@@ -68,7 +68,7 @@ const WeekOutlook = () => {
               }`}
             >
               {isToday && (
-                <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 text-[10px] font-semibold uppercase tracking-wider bg-gradient-to-r from-[hsl(var(--cel-gold))] to-[hsl(var(--cel-gold-hover))] text-[hsl(var(--cel-bg))] px-2 py-0.5 rounded-full">
+                <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 text-[10px] font-semibold uppercase tracking-wider bg-gradient-to-r from-[hsl(var(--cel-gold))] to-[hsl(var(--cel-gold-hover))] text-white px-2 py-0.5 rounded-full">
                   Today
                 </span>
               )}

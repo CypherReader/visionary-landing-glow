@@ -85,7 +85,7 @@ const ReadingCard = ({ children, index }: { children: React.ReactNode; index: nu
 );
 
 /* ─── Shared inner card styles ─── */
-const innerCard = "rounded-xl border border-[hsl(var(--cel-glass-border)/0.06)] bg-[hsl(var(--cel-glass)/0.02)] p-5 space-y-3";
+const innerCard = "rounded-xl border border-[hsl(var(--cel-glass-border)/0.12)] bg-[hsl(var(--cel-glass)/0.04)] p-5 space-y-3";
 const sectionTitle = "text-xs font-medium tracking-[0.15em] uppercase text-cel-gold/80";
 const linkStyle = "inline-flex items-center gap-1.5 text-xs font-semibold text-cel-gold hover:text-cel-gold-hover transition-colors group";
 const arrowIcon = <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />;
@@ -266,9 +266,9 @@ const SystemDots = ({ label, filled, total }: { label: string; filled: number; t
     <span className="text-xs text-cel-text-secondary w-16">{label}:</span>
     <div className="flex gap-1">
       {Array.from({ length: total }, (_, i) => (
-        <span
+    <span
           key={i}
-          className={`w-2 h-2 rounded-full ${i < filled ? "bg-cel-gold" : "bg-[hsl(var(--cel-glass)/0.1)]"}`}
+          className={`w-2 h-2 rounded-full ${i < filled ? "bg-cel-gold" : "bg-[hsl(var(--cel-glass)/0.15)]"}`}
         />
       ))}
     </div>

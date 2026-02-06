@@ -58,29 +58,29 @@ All colors MUST be HSL.
     --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-ambient: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 
-    /* ─── Celestial Observatory Palette ─── */
-    --cel-bg: 245 50% 4%;
-    --cel-bg-mid: 260 60% 6%;
-    --cel-bg-end: 255 55% 5%;
-    --cel-surface: 260 30% 8%;
-    --cel-glass: 0 0% 100%;
-    --cel-glass-border: 0 0% 100%;
-    --cel-gold: 43 65% 54%;
-    --cel-gold-hover: 43 60% 60%;
-    --cel-gold-glow: 43 65% 54%;
+    /* ─── Celestial Luminous Palette ("The Heavens") ─── */
+    --cel-bg: 35 45% 96%;
+    --cel-bg-mid: 35 40% 93%;
+    --cel-bg-end: 33 35% 88%;
+    --cel-surface: 0 0% 100%;
+    --cel-glass: 30 20% 40%;
+    --cel-glass-border: 43 73% 42%;
+    --cel-gold: 43 73% 42%;
+    --cel-gold-hover: 43 60% 48%;
+    --cel-gold-glow: 43 73% 42%;
     --cel-bronze: 30 15% 48%;
-    --cel-text-primary: 38 30% 94%;
-    --cel-text-secondary: 30 12% 55%;
-    --cel-text-tertiary: 25 10% 38%;
-    --cel-divider: 43 65% 54%;
+    --cel-text-primary: 20 13% 15%;
+    --cel-text-secondary: 35 10% 43%;
+    --cel-text-tertiary: 30 8% 58%;
+    --cel-divider: 43 73% 42%;
 
-    /* Celestial state colors */
-    --cel-cosmic-surge: 43 60% 60%;
-    --cel-rising-tide: 180 30% 50%;
-    --cel-controlled-burn: 25 50% 56%;
-    --cel-still-waters: 210 25% 53%;
-    --cel-fog-of-war: 60 3% 47%;
-    --cel-clash-day: 0 40% 54%;
+    /* Celestial state colors — adjusted for light background */
+    --cel-cosmic-surge: 43 73% 42%;
+    --cel-rising-tide: 168 50% 36%;
+    --cel-controlled-burn: 25 55% 49%;
+    --cel-still-waters: 210 29% 50%;
+    --cel-fog-of-war: 60 4% 51%;
+    --cel-clash-day: 0 42% 51%;
   }
 }
 

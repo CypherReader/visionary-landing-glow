@@ -155,8 +155,8 @@ const IntelCard = ({
     transition={{ duration: 0.35, delay: index * 0.08, ease: [0.25, 0.4, 0.25, 1] }}
     className={`rounded-xl border p-5 space-y-3 ${
       urgent
-        ? "border-[hsl(var(--cel-gold)/0.2)] bg-[hsl(var(--cel-gold-glow)/0.04)]"
-        : "border-[hsl(var(--cel-glass-border)/0.06)] bg-[hsl(var(--cel-glass)/0.02)]"
+        ? "border-[hsl(var(--cel-gold)/0.2)] bg-[hsl(var(--cel-gold-glow)/0.06)]"
+        : "border-[hsl(var(--cel-glass-border)/0.12)] bg-[hsl(var(--cel-glass)/0.04)]"
     }`}
   >
     <div className="flex items-center justify-between">

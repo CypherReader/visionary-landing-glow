@@ -62,7 +62,7 @@ const DailyInsightShareCard = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, ease: [0.25, 0.4, 0.25, 1] }}
-          className="rounded-xl border border-[hsl(var(--cel-gold)/0.1)] bg-[hsl(var(--cel-surface)/0.6)] backdrop-blur-sm p-6 space-y-5"
+          className="rounded-xl border border-[hsl(var(--cel-gold)/0.12)] bg-[hsl(var(--cel-surface)/0.85)] backdrop-blur-sm p-6 space-y-5 shadow-[0_2px_16px_-4px_rgba(180,160,120,0.10)]"
         >
           <div className="text-center space-y-1">
             <p className="text-[10px] font-medium tracking-[0.35em] uppercase text-cel-gold">

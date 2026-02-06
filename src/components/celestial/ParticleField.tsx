@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-const PARTICLE_COUNT = 30;
+const PARTICLE_COUNT = 25;
 const DRIFT_CYCLE = 60000;
 const OPACITY_PULSE = 3000;
 
@@ -34,12 +34,12 @@ const ParticleField = () => {
     resize();
     window.addEventListener("resize", resize);
 
-    // Initialize particles
+    // Initialize particles — slightly more visible on light background
     particlesRef.current = Array.from({ length: PARTICLE_COUNT }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
-      size: 1 + Math.random() * 2,
-      baseOpacity: 0.05 + Math.random() * 0.1,
+      size: 1 + Math.random() * 1.5,
+      baseOpacity: 0.10 + Math.random() * 0.12,
       driftAngle: Math.random() * Math.PI * 2,
       driftRadius: 20 + Math.random() * 40,
       phase: Math.random() * Math.PI * 2,
@@ -59,10 +59,10 @@ const ParticleField = () => {
           p.baseOpacity *
           (0.5 + 0.5 * Math.sin(pulseProgress + p.pulsePhase));
 
-        // Gold color: hsl(43, 65%, 54%) ≈ rgb(201, 168, 76)
+        // Gold color: hsl(43, 73%, 42%) ≈ rgb(185, 149, 29)
         ctx.beginPath();
         ctx.arc(x % canvas.width, y % canvas.height, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(201, 168, 76, ${opacity})`;
+        ctx.fillStyle = `rgba(185, 149, 29, ${opacity})`;
         ctx.fill();
       });
 
