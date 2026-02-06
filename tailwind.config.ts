@@ -145,6 +145,8 @@ export default {
         "float": "float 6s ease-in-out infinite",
         "spin-slow": "spin-slow 20s linear infinite",
         "scan": "scan 2s linear infinite",
+        "celestial-light-a": "celestial-light-a 25s ease-in-out infinite",
+        "celestial-light-b": "celestial-light-b 30s ease-in-out infinite",
       },
     },
   },
