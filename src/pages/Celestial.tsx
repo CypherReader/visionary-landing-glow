@@ -2,6 +2,7 @@ import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import ParticleField from "@/components/celestial/ParticleField";
+import CausticLight from "@/components/celestial/CausticLight";
 import DailyBriefing from "@/components/celestial/DailyBriefing";
 import TodaysMaster from "@/components/celestial/TodaysMaster";
 import SmartActions from "@/components/celestial/SmartActions";
@@ -36,6 +37,7 @@ const Celestial = () => {
         }}
       />
 
+      <CausticLight />
       <ParticleField />
 
       <div
