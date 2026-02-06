@@ -1,6 +1,8 @@
 import { Share2, Download } from "lucide-react";
 import { format } from "date-fns";
+import { motion } from "framer-motion";
 import CelestialCard from "./CelestialCard";
+import { useCountUp } from "@/hooks/use-count-up";
 
 const DailyInsightShareCard = () => {
   const today = new Date();
@@ -9,6 +11,8 @@ const DailyInsightShareCard = () => {
   const dayMaster = "Earth";
   const insight =
     "Metal sharpens what Earth has built. Today, let precision — not force — be your instrument of change.";
+
+  const [displayScore, scoreRef] = useCountUp({ end: score, duration: 1000 });
 
   const handleShare = async () => {
     const text = `✦ FENG SHUI ANGELS ✦ · ${format(today, "d MMM yyyy")}\n\nEnergy Score: ${score}/100\nElement: ${element} · Day Master: ${dayMaster}\n\n"${insight}"\n\n— Your Cosmic Intelligence`;
@@ -53,7 +57,13 @@ const DailyInsightShareCard = () => {
         </div>
 
         {/* The shareable "card" */}
-        <div className="rounded-xl border border-[hsl(var(--cel-gold)/0.1)] bg-[hsl(var(--cel-surface)/0.6)] backdrop-blur-sm p-6 space-y-5">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.96 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, ease: [0.25, 0.4, 0.25, 1] }}
+          className="rounded-xl border border-[hsl(var(--cel-gold)/0.1)] bg-[hsl(var(--cel-surface)/0.6)] backdrop-blur-sm p-6 space-y-5"
+        >
           <div className="text-center space-y-1">
             <p className="text-[10px] font-medium tracking-[0.35em] uppercase text-cel-gold">
               ✦ Feng Shui Angels ✦
@@ -66,8 +76,11 @@ const DailyInsightShareCard = () => {
           <div className="flex justify-center">
             <div className="flex items-center gap-6">
               <div className="text-center">
-                <p className="text-4xl font-serif font-bold text-cel-gold tabular-nums">
-                  {score}
+                <p
+                  ref={scoreRef as React.RefObject<HTMLParagraphElement>}
+                  className="text-4xl font-serif font-bold text-cel-gold tabular-nums"
+                >
+                  {displayScore}
                 </p>
                 <p className="text-[10px] text-cel-text-secondary uppercase mt-1">
                   Energy
@@ -97,7 +110,7 @@ const DailyInsightShareCard = () => {
           <blockquote className="text-center text-base font-serif leading-[1.6] text-cel-text-primary/85 italic px-4">
             "{insight}"
           </blockquote>
-        </div>
+        </motion.div>
       </div>
     </CelestialCard>
   );

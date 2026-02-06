@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ArrowRight, ChevronDown, ChevronUp } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { motion, AnimatePresence } from "framer-motion";
 import CelestialCard from "./CelestialCard";
 
 /* ─── Secret Schools ─── */
@@ -37,74 +37,89 @@ const CosmicIntelligenceFeed = () => {
 
   return (
     <CelestialCard>
-      <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-        <CollapsibleTrigger asChild>
-          <button className="w-full flex items-center justify-between p-6 pb-0 hover:opacity-80 transition-opacity">
-            <div className="flex items-center gap-2">
-              <span className="text-sm">🔮</span>
-              <h2 className="text-sm font-medium tracking-[0.2em] uppercase text-cel-gold">
-                Cosmic Intelligence
-              </h2>
-            </div>
-            {isOpen ? (
-              <ChevronUp className="w-4 h-4 text-cel-text-secondary" />
-            ) : (
-              <ChevronDown className="w-4 h-4 text-cel-text-secondary" />
-            )}
-          </button>
-        </CollapsibleTrigger>
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex items-center justify-between p-6 pb-0 hover:opacity-80 transition-opacity"
+      >
+        <div className="flex items-center gap-2">
+          <span className="text-sm">🔮</span>
+          <h2 className="text-sm font-medium tracking-[0.2em] uppercase text-cel-gold">
+            Cosmic Intelligence
+          </h2>
+        </div>
+        <motion.div
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.25 }}
+        >
+          <ChevronDown className="w-4 h-4 text-cel-text-secondary" />
+        </motion.div>
+      </button>
 
+      <AnimatePresence initial={false}>
         {!isOpen && (
-          <p className="px-6 py-4 text-xs text-cel-text-secondary">
+          <motion.p
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25 }}
+            className="px-6 py-4 text-xs text-cel-text-secondary overflow-hidden"
+          >
             {school.emoji} {school.module} · 🏛️ Life Architect · 🏠 Feng Shui · 📅 Life Events — tap to expand
-          </p>
+          </motion.p>
         )}
+      </AnimatePresence>
 
-        <CollapsibleContent>
-          <div className="p-6 pt-4 space-y-4">
-            {/* Secret Schools */}
-            <IntelCard
-              emoji={school.emoji}
-              title={`SECRET SCHOOLS · ${school.module}`}
-              content={school.content}
-              linkTo={school.link}
-              linkLabel={school.linkLabel}
-            />
-
-            {/* Life Architect */}
-            <IntelCard
-              emoji="🏛️"
-              title="LIFE ARCHITECT · Zi Wei Dou Shu"
-              subtitle="Current decade: Health Palace (40s) · Year 1 of 10 · Theme: Physical renewal"
-              content="This decade emphasises your body's relationship with your ambitions. Career pushes that ignore health will backfire in this palace."
-              linkTo="/dashboard"
-              linkLabel="View Full Life Map"
-            />
-
-            {/* Feng Shui */}
-            <IntelCard
-              emoji="🏠"
-              title="FENG SHUI · Monthly Adjustment"
-              subtitle="February focus: Northwest sector"
-              content="Add Metal elements — a metal bowl or white/grey decor. The Tiger month's Wood energy is depleting your Northwest Metal, affecting career luck."
-              linkTo="/dashboard"
-              linkLabel="Full Feng Shui Analysis"
-            />
-
-            {/* Life Event Planner */}
-            <IntelCard
-              emoji="📅"
-              title="LIFE EVENT PLANNER"
-              subtitle='Your last search: "Best day to sign employment contract"'
-              content="Next best date: March 9, 2026 — Wood-Water harmony day. Your Day Master is fully supported."
-              linkTo="/dashboard"
-              linkLabel="Plan Another Event"
-              urgent
-              urgentText="Optimal date in 31 days"
-            />
-          </div>
-        </CollapsibleContent>
-      </Collapsible>
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.35, ease: [0.25, 0.4, 0.25, 1] }}
+            className="overflow-hidden"
+          >
+            <div className="p-6 pt-4 space-y-4">
+              <IntelCard
+                emoji={school.emoji}
+                title={`SECRET SCHOOLS · ${school.module}`}
+                content={school.content}
+                linkTo={school.link}
+                linkLabel={school.linkLabel}
+                index={0}
+              />
+              <IntelCard
+                emoji="🏛️"
+                title="LIFE ARCHITECT · Zi Wei Dou Shu"
+                subtitle="Current decade: Health Palace (40s) · Year 1 of 10 · Theme: Physical renewal"
+                content="This decade emphasises your body's relationship with your ambitions. Career pushes that ignore health will backfire in this palace."
+                linkTo="/dashboard"
+                linkLabel="View Full Life Map"
+                index={1}
+              />
+              <IntelCard
+                emoji="🏠"
+                title="FENG SHUI · Monthly Adjustment"
+                subtitle="February focus: Northwest sector"
+                content="Add Metal elements — a metal bowl or white/grey decor. The Tiger month's Wood energy is depleting your Northwest Metal, affecting career luck."
+                linkTo="/dashboard"
+                linkLabel="Full Feng Shui Analysis"
+                index={2}
+              />
+              <IntelCard
+                emoji="📅"
+                title="LIFE EVENT PLANNER"
+                subtitle='Your last search: "Best day to sign employment contract"'
+                content="Next best date: March 9, 2026 — Wood-Water harmony day. Your Day Master is fully supported."
+                linkTo="/dashboard"
+                linkLabel="Plan Another Event"
+                urgent
+                urgentText="Optimal date in 31 days"
+                index={3}
+              />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </CelestialCard>
   );
 };
@@ -120,6 +135,7 @@ interface IntelCardProps {
   linkLabel: string;
   urgent?: boolean;
   urgentText?: string;
+  index?: number;
 }
 
 const IntelCard = ({
@@ -131,8 +147,12 @@ const IntelCard = ({
   linkLabel,
   urgent,
   urgentText,
+  index = 0,
 }: IntelCardProps) => (
-  <div
+  <motion.div
+    initial={{ opacity: 0, y: 12 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.35, delay: index * 0.08, ease: [0.25, 0.4, 0.25, 1] }}
     className={`rounded-xl border p-5 space-y-3 ${
       urgent
         ? "border-[hsl(var(--cel-gold)/0.2)] bg-[hsl(var(--cel-gold-glow)/0.04)]"
@@ -166,7 +186,7 @@ const IntelCard = ({
       {linkLabel}
       <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
     </Link>
-  </div>
+  </motion.div>
 );
 
 export default CosmicIntelligenceFeed;

@@ -1,5 +1,9 @@
 import { Clock, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 import CelestialCard from "./CelestialCard";
+import { useCountUp } from "@/hooks/use-count-up";
+
+/* ─── Mock data ─── */
 
 interface ChineseHour {
   label: string;
@@ -65,6 +69,8 @@ const CurrentMoment = () => {
   const nextIndex = (currentIndex + 1) % chineseHours.length;
   const next = chineseHours[nextIndex];
 
+  const [displayScore, scoreRef] = useCountUp({ end: current.score, duration: 1000 });
+
   return (
     <CelestialCard className="p-6 space-y-5">
       {/* Header */}
@@ -88,8 +94,11 @@ const CurrentMoment = () => {
         <div className="flex items-center gap-3">
           <div className="flex flex-col items-center gap-1 px-4 py-3 rounded-xl bg-[hsl(var(--cel-gold-glow)/0.06)] border border-[hsl(var(--cel-gold)/0.12)]">
             <span className="text-3xl">{elementIcons[current.element]}</span>
-            <span className={`text-3xl font-serif font-bold tabular-nums ${getScoreColor(current.score)}`}>
-              {current.score}
+            <span
+              ref={scoreRef as React.RefObject<HTMLSpanElement>}
+              className={`text-3xl font-serif font-bold tabular-nums ${getScoreColor(current.score)}`}
+            >
+              {displayScore}
             </span>
             <span className="text-[10px] text-cel-text-secondary uppercase">{current.element}</span>
           </div>
@@ -108,7 +117,7 @@ const CurrentMoment = () => {
         </div>
       </div>
 
-      {/* Mini Timeline */}
+      {/* Mini Timeline — bars animate in staggered */}
       <div className="flex items-end gap-1 h-16">
         {chineseHours.map((hour, i) => {
           const isActive = i === currentIndex;
@@ -118,9 +127,13 @@ const CurrentMoment = () => {
           return (
             <div key={hour.label} className="flex-1 flex flex-col items-center gap-1">
               <div className="w-full flex items-end" style={{ height: 48 }}>
-                <div
-                  className={`w-full rounded-t transition-all ${getBarColor(hour.score, isActive)} ${isPast ? "opacity-40" : ""} ${isActive ? "ring-1 ring-cel-gold/50" : ""}`}
-                  style={{ height: `${heightPercent}%`, minHeight: 4 }}
+                <motion.div
+                  initial={{ height: 4 }}
+                  whileInView={{ height: `${heightPercent}%` }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: i * 0.04, ease: [0.25, 0.4, 0.25, 1] }}
+                  className={`w-full rounded-t ${getBarColor(hour.score, isActive)} ${isPast ? "opacity-40" : ""} ${isActive ? "ring-1 ring-cel-gold/50" : ""}`}
+                  style={{ minHeight: 4 }}
                 />
               </div>
               <span className={`text-[8px] ${isActive ? "text-cel-gold font-bold" : "text-cel-text-tertiary"}`}>

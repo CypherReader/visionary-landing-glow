@@ -1,5 +1,7 @@
 import { Zap, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 import CelestialCard from "./CelestialCard";
+import { useCountUp } from "@/hooks/use-count-up";
 
 interface PowerWindow {
   rank: number;
@@ -49,6 +51,15 @@ const elementColors: Record<string, { bg: string; text: string; border: string }
   Metal: { bg: "bg-[hsl(var(--cel-fog-of-war)/0.1)]", text: "text-cel-fog-of-war", border: "border-[hsl(var(--cel-fog-of-war)/0.2)]" },
 };
 
+const PowerWindowScore = ({ score, colorClass }: { score: number; colorClass: string }) => {
+  const [displayScore, ref] = useCountUp({ end: score, duration: 1000 });
+  return (
+    <span ref={ref as React.RefObject<HTMLSpanElement>} className={`text-2xl font-serif font-bold tabular-nums shrink-0 ${colorClass}`}>
+      {displayScore}
+    </span>
+  );
+};
+
 const ActivePowerWindows = () => {
   return (
     <CelestialCard highlighted className="p-6 space-y-4">
@@ -60,11 +71,15 @@ const ActivePowerWindows = () => {
       </div>
 
       <div className="space-y-3">
-        {powerWindows.map((pw) => {
+        {powerWindows.map((pw, i) => {
           const colors = elementColors[pw.element] || elementColors.Metal;
           return (
-            <div
+            <motion.div
               key={pw.rank}
+              initial={{ opacity: 0, x: -16 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: i * 0.1, ease: [0.25, 0.4, 0.25, 1] }}
               className={`group rounded-xl border p-4 transition-all ${colors.bg} ${colors.border}`}
             >
               <div className="flex items-start gap-4">
@@ -84,11 +99,9 @@ const ActivePowerWindows = () => {
                   </p>
                   <p className="text-xs text-cel-text-secondary italic">{pw.reason}</p>
                 </div>
-                <span className={`text-2xl font-serif font-bold tabular-nums shrink-0 ${colors.text}`}>
-                  {pw.score}
-                </span>
+                <PowerWindowScore score={pw.score} colorClass={colors.text} />
               </div>
-            </div>
+            </motion.div>
           );
         })}
       </div>

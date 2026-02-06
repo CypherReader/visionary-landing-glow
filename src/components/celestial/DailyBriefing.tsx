@@ -1,6 +1,8 @@
 import { Crown, Sparkles } from "lucide-react";
 import { format } from "date-fns";
+import { motion } from "framer-motion";
 import CelestialCard from "./CelestialCard";
+import { useCountUp } from "@/hooks/use-count-up";
 
 const DailyBriefing = () => {
   const today = new Date();
@@ -8,6 +10,8 @@ const DailyBriefing = () => {
   const dayMaster = "Earth";
   const todayElement = "Metal";
   const stateName = "Controlled Burn";
+
+  const [displayScore, scoreRef] = useCountUp({ end: score, duration: 1400 });
 
   const getScoreColor = (s: number) => {
     if (s >= 80) return "text-cel-cosmic-surge";
@@ -38,21 +42,30 @@ const DailyBriefing = () => {
             </span>
           </div>
 
-          <div
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1], delay: 0.2 }}
             className={`relative flex items-center justify-center w-28 h-28 rounded-full border border-[hsl(var(--cel-gold)/0.25)] ${getScoreGlow(score)}`}
           >
             <div className="absolute inset-1 rounded-full bg-[hsl(var(--cel-surface)/0.8)]" />
             <span
+              ref={scoreRef as React.RefObject<HTMLSpanElement>}
               className={`relative text-5xl font-serif font-bold tabular-nums ${getScoreColor(score)}`}
             >
-              {score}
+              {displayScore}
             </span>
-          </div>
+          </motion.div>
 
           {/* State name */}
-          <p className="text-xs font-medium tracking-[0.2em] uppercase text-cel-gold">
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8, duration: 0.5 }}
+            className="text-xs font-medium tracking-[0.2em] uppercase text-cel-gold"
+          >
             {stateName} 🔥
-          </p>
+          </motion.p>
 
           <div className="text-center lg:text-left space-y-0.5">
             <p className="text-xs text-cel-text-secondary">
@@ -65,7 +78,12 @@ const DailyBriefing = () => {
         </div>
 
         {/* Right: AI Briefing */}
-        <div className="flex-1 space-y-5">
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.3, ease: [0.25, 0.4, 0.25, 1] }}
+          className="flex-1 space-y-5"
+        >
           <div className="flex items-center gap-2">
             <Sparkles className="w-4 h-4 text-cel-gold" />
             <h2 className="text-sm font-medium tracking-[0.2em] uppercase text-cel-gold">
@@ -81,7 +99,12 @@ const DailyBriefing = () => {
             it for financial decisions and career conversations.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-3 pt-1">
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="flex flex-col sm:flex-row gap-3 pt-1"
+          >
             <div className="flex items-start gap-2.5 rounded-xl bg-[hsl(var(--cel-rising-tide)/0.08)] border border-[hsl(var(--cel-rising-tide)/0.15)] px-4 py-3 flex-1">
               <span className="text-cel-gold text-lg mt-0.5">✦</span>
               <div>
@@ -107,8 +130,8 @@ const DailyBriefing = () => {
                 </p>
               </div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </CelestialCard>
   );
