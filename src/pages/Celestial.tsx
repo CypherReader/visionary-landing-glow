@@ -1,10 +1,14 @@
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import DailyBriefing from "@/components/celestial/DailyBriefing";
+import TodaysMaster from "@/components/celestial/TodaysMaster";
+import SmartActions from "@/components/celestial/SmartActions";
 import CurrentMoment from "@/components/celestial/CurrentMoment";
 import ActivePowerWindows from "@/components/celestial/ActivePowerWindows";
-import DailyAffirmation from "@/components/celestial/DailyAffirmation";
-import SmartActions from "@/components/celestial/SmartActions";
+import CosmicIntelligenceFeed from "@/components/celestial/CosmicIntelligenceFeed";
+import WeekOutlook from "@/components/celestial/WeekOutlook";
+import ActiveReadings from "@/components/celestial/ActiveReadings";
+import DailyInsightShareCard from "@/components/celestial/DailyInsightShareCard";
 import JourneyProgress from "@/components/celestial/JourneyProgress";
 
 const Celestial = () => {
@@ -34,27 +38,45 @@ const Celestial = () => {
           Back to Dashboard
         </Link>
 
-        {/* 1. Daily Briefing — "Your Day in 30 Seconds" */}
+        {/* Section 1: Daily Briefing — HERO */}
         <DailyBriefing />
 
-        {/* 2. Right Now + Power Windows */}
+        {/* Section 2: Today's Master — HERO */}
+        <TodaysMaster />
+
+        {/* Section 3: Today's Actions — HERO (2 contextual cards) */}
+        <SmartActions />
+
+        {/* Section 4: Live Energy — HERO (Timeline + Power Windows) */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
           <CurrentMoment />
           <ActivePowerWindows />
         </div>
 
-        {/* 3. Daily Affirmation + Smart Actions */}
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-5">
-          <div className="lg:col-span-2">
-            <DailyAffirmation />
-          </div>
-          <div className="lg:col-span-3">
-            <SmartActions />
-          </div>
-        </div>
+        {/* Section 5: Cosmic Intelligence Feed — SURFACE (collapsible) */}
+        <CosmicIntelligenceFeed />
 
-        {/* 4. Journey Progress */}
+        {/* Section 6: 7-Day Outlook — HERO */}
+        <WeekOutlook />
+
+        {/* Section 7: Active Readings — SURFACE (collapsible) */}
+        <ActiveReadings />
+
+        {/* Section 8: Daily Insight Card — HERO (shareable) */}
+        <DailyInsightShareCard />
+
+        {/* Section 9: Journey — SURFACE */}
         <JourneyProgress />
+
+        {/* Overflow link */}
+        <div className="flex justify-center py-4">
+          <Link
+            to="/dashboard"
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            All Features →
+          </Link>
+        </div>
       </div>
     </div>
   );
