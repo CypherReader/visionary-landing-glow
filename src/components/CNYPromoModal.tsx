@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Sparkles, Copy, Check } from "lucide-react";
+import { X, Sparkles, Copy, Check, Volume2, VolumeX } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import cnyVideo from "@/assets/cny-hero-video.mp4";
 import cnyHero from "@/assets/cny-hero.jpg";
 
 const STORAGE_KEY = "cny-promo-dismissed-2026";
@@ -11,19 +12,79 @@ const PROMO_CODE = "HORSE2026";
 const CNYPromoModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+  const [audioLoaded, setAudioLoaded] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const audioUrlRef = useRef<string | null>(null);
+
+  const playSound = useCallback(async () => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/elevenlabs-sfx`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
+            Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+          },
+          body: JSON.stringify({
+            prompt:
+              "Chinese New Year celebration gong hit followed by gentle chimes and soft festive jingle bells, warm and auspicious atmosphere",
+            duration: 4,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        console.warn("SFX request failed:", response.status);
+        return;
+      }
+
+      const audioBlob = await response.blob();
+      const audioUrl = URL.createObjectURL(audioBlob);
+      audioUrlRef.current = audioUrl;
+
+      const audio = new Audio(audioUrl);
+      audio.volume = 0.4;
+      audioRef.current = audio;
+      setAudioLoaded(true);
+      await audio.play();
+    } catch (err) {
+      console.warn("Sound effect failed to load:", err);
+    }
+  }, []);
 
   useEffect(() => {
     const dismissed = localStorage.getItem(STORAGE_KEY);
     if (!dismissed) {
-      // Small delay so it feels intentional, not jarring
-      const timer = setTimeout(() => setIsOpen(true), 1200);
+      const timer = setTimeout(() => {
+        setIsOpen(true);
+        playSound();
+      }, 1200);
       return () => clearTimeout(timer);
     }
+  }, [playSound]);
+
+  // Clean up audio on unmount
+  useEffect(() => {
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+      if (audioUrlRef.current) {
+        URL.revokeObjectURL(audioUrlRef.current);
+      }
+    };
   }, []);
 
   const handleDismiss = () => {
     setIsOpen(false);
     localStorage.setItem(STORAGE_KEY, "true");
+    if (audioRef.current) {
+      audioRef.current.pause();
+    }
   };
 
   const handleCopyCode = async () => {
@@ -35,6 +96,17 @@ const CNYPromoModal = () => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     }
+  };
+
+  const toggleMute = () => {
+    if (audioRef.current) {
+      if (isMuted) {
+        audioRef.current.volume = 0.4;
+      } else {
+        audioRef.current.volume = 0;
+      }
+    }
+    setIsMuted(!isMuted);
   };
 
   return (
@@ -68,22 +140,45 @@ const CNYPromoModal = () => {
                 "linear-gradient(165deg, hsl(350 60% 12%), hsl(270 40% 10%), hsl(240 25% 8%))",
             }}
           >
-            {/* Close button */}
-            <button
-              onClick={handleDismiss}
-              className="absolute top-4 right-4 z-20 rounded-full bg-black/40 p-2 text-white/70 backdrop-blur-sm transition-colors hover:bg-black/60 hover:text-white"
-              aria-label="Close"
-            >
-              <X className="h-4 w-4" />
-            </button>
+            {/* Top controls */}
+            <div className="absolute top-4 right-4 z-20 flex items-center gap-2">
+              {audioLoaded && (
+                <motion.button
+                  onClick={toggleMute}
+                  className="rounded-full bg-black/40 p-2 text-white/70 backdrop-blur-sm transition-colors hover:bg-black/60 hover:text-white"
+                  aria-label={isMuted ? "Unmute" : "Mute"}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.6 }}
+                >
+                  {isMuted ? (
+                    <VolumeX className="h-4 w-4" />
+                  ) : (
+                    <Volume2 className="h-4 w-4" />
+                  )}
+                </motion.button>
+              )}
+              <button
+                onClick={handleDismiss}
+                className="rounded-full bg-black/40 p-2 text-white/70 backdrop-blur-sm transition-colors hover:bg-black/60 hover:text-white"
+                aria-label="Close"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
 
-            {/* Hero image */}
+            {/* Hero video */}
             <div className="relative h-56 overflow-hidden">
-              <img
-                src={cnyHero}
-                alt="Year of the Horse 2026 — Golden celestial horse with lanterns"
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                poster={cnyHero}
                 className="h-full w-full object-cover"
-              />
+              >
+                <source src={cnyVideo} type="video/mp4" />
+              </video>
               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[hsl(350,60%,12%)]" />
 
               {/* Floating particles overlay */}
@@ -167,8 +262,8 @@ const CNYPromoModal = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
               >
-                Celebrate the Year of the Horse with our grand launch. 
-                Unlock exclusive cosmic insights and start your celestial 
+                Celebrate the Year of the Horse with our grand launch.
+                Unlock exclusive cosmic insights and start your celestial
                 journey with a special Lunar New Year offer.
               </motion.p>
 
