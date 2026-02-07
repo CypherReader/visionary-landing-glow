@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard";
 import Matcher from "./pages/Matcher";
 import Oracle from "./pages/Oracle";
 import Celestial from "./pages/Celestial";
+import CNYPromo from "./pages/CNYPromo";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/matcher" element={<Matcher />} />
           <Route path="/oracle" element={<Oracle />} />
           <Route path="/celestial" element={<Celestial />} />
+          <Route path="/cny" element={<CNYPromo />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
