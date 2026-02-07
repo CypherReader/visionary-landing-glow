@@ -28,8 +28,8 @@ const CNYPromo = () => {
           },
           body: JSON.stringify({
             prompt:
-              "Chinese New Year celebration gong hit followed by gentle chimes and soft festive jingle bells, warm and auspicious atmosphere",
-            duration: 4,
+              "Traditional Chinese guzheng and erhu melody with gentle bamboo flute, festive and auspicious Lunar New Year celebration music, warm and elegant",
+            duration: 8,
           }),
         }
       );
